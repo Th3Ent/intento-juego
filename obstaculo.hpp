@@ -1,4 +1,10 @@
+#pragma once
+
 #include <iostream>
+#include <vector>
+//#include <unistd.h>
+#include <stdlib.h>
+
 using namespace std;
 
 class obstaculo{
@@ -8,37 +14,16 @@ class obstaculo{
         bool fin;
     public:
         
-        obstaculo(){
-            obstac = false;
-            inicio = false;
-            fin = false;
-        }
+        obstaculo();
+        obstaculo(bool ob, bool inicio_, bool fin_);
+        ~obstaculo();
         
-        obstaculo(bool ob, bool inicio_, bool fin_){
-            obstac =  ob;
-            inicio = inicio_;
-            fin = fin_;
-        }
+        bool get_obstac();
+        void set_obstac();
         
-        bool get_obstac(){
-            return obstac;
-        }
-        void set_obstac(){
-            obstac = true;
-        }
+        bool get_inicio();
+        void set_inicio();
         
-        bool get_inicio(){
-            return inicio;
-        }
-        void set_inicio(){
-            inicio = true;
-        }
-        
-        
-        bool get_fin(){
-            return fin;
-        }
-        void set_fin(){
-            fin = true;
-        }
+        bool get_fin();
+        void set_fin();
 };
