@@ -34,3 +34,10 @@ bool obstaculo::get_fin(){
 void obstaculo::set_fin(){
     fin = true;
 }
+char obstaculo::get_estela(){
+    return estela;
+}
+
+void obstaculo::set_estela(char estela_){
+    estela = estela_;
+}

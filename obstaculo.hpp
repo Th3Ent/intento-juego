@@ -12,6 +12,7 @@ class obstaculo{
         bool obstac;
         bool inicio;
         bool fin;
+        char estela = ' ';
     public:
         
         obstaculo();
@@ -26,4 +27,7 @@ class obstaculo{
         
         bool get_fin();
         void set_fin();
+        
+        char get_estela();
+        void set_estela(char estela_);
 };

@@ -9,6 +9,7 @@
 #define KGRN "\x1B[32m"
 #define KYEL "\x1B[33m"
 #define KCYN "\x1B[36m"
+#define KSRED "\x1B[91m"
 
 typedef struct{
     int pos_x;

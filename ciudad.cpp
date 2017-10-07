@@ -40,7 +40,7 @@ void ciudad::pintar_ciudad(void){
             else if(city[i][j].get_inicio()) //\xc2\xb1 es lo mas parecido a un coche
                 cout << KRED " X";
             else
-                cout<< "  ";
+                cout<<KSRED " "<<city[i][j].get_estela();
         }
         cout<< KGRN " \xe2\x95\x91"<<endl;
     }
@@ -80,15 +80,23 @@ bool ciudad::mover_carro(char mov){
     switch(mov){
         case 'a': if(!city[carro.pos_x][carro.pos_y-1].get_obstac() && (carro.pos_y-1 >= 0 ))
                   carro.pos_y--;
+                  carro.car = '<';
+                  city[carro.pos_x][carro.pos_y].set_estela('-');
                   break;
         case 's': if( (carro.pos_x+1 < pos_x) && !city[carro.pos_x+1][carro.pos_y].get_obstac())
                   carro.pos_x++;
+                  carro.car = 'v';
+                  city[carro.pos_x][carro.pos_y].set_estela('|');
                   break;
         case 'd': if(!city[carro.pos_x][carro.pos_y+1].get_obstac() && (carro.pos_y+1 < pos_y))
                   carro.pos_y++;
+                  carro.car = '>';
+                  city[carro.pos_x][carro.pos_y].set_estela('-');
                   break;
         case 'w': if((carro.pos_x-1 >= 0) && !city[carro.pos_x-1][carro.pos_y].get_obstac())
                   carro.pos_x--;
+                  carro.car = '^';
+                  city[carro.pos_x][carro.pos_y].set_estela('|');
                   break;
         default: cout<<"\nMovimiento erroneo";
         

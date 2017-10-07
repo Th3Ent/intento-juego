@@ -1,5 +1,7 @@
 #include "ciudad.hpp"
-
+#include <ncurses.h>
+#include <stdlib.h>
+#include <unistd.h>
 #define KBLU "\x1B[34m"
 #define KWHT "\x1B[37m"
 #define KRED "\x1B[31m"
@@ -61,12 +63,15 @@ int main(){
                     break;
             case 2: cout << "\nIntroduce porcentaje: ";
                     int porcentaje;
-                    while(porcentaje > 100){
+                    while(porcentaje > 101){
                     cin >> porcentaje;
-                    if(porcentaje > 100)
+                    if(porcentaje > 101)
                         cout<<"\n El porcentaje maximo es 100% no "<<porcentaje;
                     }
                     n_obstaculos = (n_columnas*n_filas*porcentaje)/100;
+                    if(n_obstaculos == n_columnas*n_filas)
+                        n_obstaculos = n_obstaculos-2;
+                    
                     citi.aleatorio(n_obstaculos);
                     break;
             case 3: cout << "\nNúmero de obstáculos: ";
@@ -83,15 +88,26 @@ int main(){
        
     char mov; 
     bool fin;
+    
     do{
     system("clear");
     citi.pintar_ciudad();
+    usleep(50000);
     
-    cout<<"\n :- ";
-    cin>>mov;
-    if(mov != 'q')
+    initscr();
+	nodelay(stdscr,TRUE);
+	keypad(stdscr,TRUE);
+	echo();
+    mov = getch();
+    refresh();
+    endwin();
+    
+    
+    if(mov != 'q' &&  mov!= ERR)
     fin = citi.mover_carro(mov);
+    
     }while(!(fin || mov == 'q'));
+    
     
     return 0;
     
