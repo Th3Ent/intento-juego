@@ -1,15 +1,8 @@
 #pragma once
 
-#include "obstaculo.hpp"
+#include "camino.hpp"
 
-#define KBLU "\x1B[34m"
-#define KWHT "\x1B[37m"
-#define KRED "\x1B[31m"
-#define RSD "\x1B[0m"
-#define KGRN "\x1B[32m"
-#define KYEL "\x1B[33m"
-#define KCYN "\x1B[36m"
-#define KSRED "\x1B[91m"
+
 
 typedef struct{
     int pos_x;
@@ -20,7 +13,7 @@ typedef struct{
 class ciudad{
 
   private:
-    vector<vector<obstaculo> > city;
+    vector<vector<camino*> > city;
     int pos_x;
     int pos_y;
     coche carro;

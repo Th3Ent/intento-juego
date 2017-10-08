@@ -88,27 +88,35 @@ int main(){
        
     char mov; 
     bool fin;
-    
-    do{
     system("clear");
     citi.pintar_ciudad();
+    do{
+    
+    
     usleep(50000);
     
     initscr();
 	nodelay(stdscr,TRUE);
 	keypad(stdscr,TRUE);
 	echo();
+	
     mov = getch();
     refresh();
     endwin();
     
     
-    if(mov != 'q' &&  mov!= ERR)
+    if(mov != 'q' &&  mov!= ERR){
     fin = citi.mover_carro(mov);
-    
+    system("clear");
+    citi.pintar_ciudad();
+    }
     }while(!(fin || mov == 'q'));
-    
+    if(fin)
+        cout<<"\nFELICIDADES! LLEGASTE AL DESTINO\n\n";
     
     return 0;
     
 }
+
+
+//g++ -std=c++11 *.cpp -lncurses -fpermissive
