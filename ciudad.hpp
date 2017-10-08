@@ -11,14 +11,15 @@ typedef struct{
 } coche;
 
 class ciudad{
-
-  private:
+  
+  public:
+  
     vector<vector<camino*> > city;
     int pos_x;
     int pos_y;
     coche carro;
     
-  public:
+
     
     ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin);
     ~ciudad();
@@ -26,7 +27,10 @@ class ciudad{
     void pintar_ciudad(void);
     void manu_alea(int n);
     void aleatorio(int n);
+    void realeatorio(int n);
+    void realeatorio(int n, int x, int y);
     bool mover_carro(char mov);
+    void set_obstac();
     
 };
 

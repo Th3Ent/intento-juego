@@ -66,12 +66,60 @@ void ciudad::aleatorio(int n){
         int x, y;
         x = rand() % pos_x;
         y = rand() % pos_y;
-        if(city[x][y]->que_soy() < 3){
+        if(city[x][y]->que_soy() < 2){
         city[x][y] = new obstaculo();
         n--;
         }
     }
 }
+
+
+void ciudad::realeatorio(int n){
+    
+    srand(time(NULL));
+    
+    for(int i = 0; i< pos_x; i++)
+        for(int j = 0; j <pos_y; j++)
+            if(city[i][j]->que_soy() < 3 )
+              city[i][j] = new camino();
+    
+    while(n > 0){  
+        int x, y;
+        x = rand() % pos_x;
+        y = rand() % pos_y;
+        if(city[x][y]->que_soy() < 2){
+        city[x][y] = new obstaculo();
+        n--;
+        }
+    }
+    system("clear");
+    pintar_ciudad();
+}
+
+void ciudad::realeatorio(int n, int x, int y){
+    carro.pos_x = x;
+    carro.pos_y = y;
+    srand(time(NULL));
+    
+    for(int i = 0; i< pos_x; i++)
+        for(int j = 0; j <pos_y; j++)
+            if(city[i][j]->que_soy() < 3 )
+              city[i][j] = new camino();
+    
+    while(n > 0){  
+        int x, y;
+        x = rand() % pos_x;
+        y = rand() % pos_y;
+        if(city[x][y]->que_soy() < 2){
+        city[x][y] = new obstaculo();
+        n--;
+        }
+    }
+    system("clear");
+    pintar_ciudad();
+}
+
+
 
 bool ciudad::mover_carro(char mov){
     //cout<<endl<<carro.pos_x<<" <--X  Y--> 0"<<carro.pos_y;
@@ -114,4 +162,17 @@ bool ciudad::mover_carro(char mov){
         else
             return false;
     //cout<<endl<<carro.pos_x<<" <--X  Y--> 0"<<carro.pos_y;
+}
+
+void ciudad::set_obstac(){
+    if(city[carro.pos_x][carro.pos_y]->que_soy() < 3){
+        city[carro.pos_x][carro.pos_y] = new obstaculo();
+        system("clear");
+       pintar_ciudad();
+        }else{
+            system("clear");
+            pintar_ciudad();
+            cout<<"\nImposible";
+        }
+    
 }

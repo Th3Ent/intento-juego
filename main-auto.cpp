@@ -15,7 +15,7 @@ int main(){
         cout<<endl;
     system("clear");
     
-    int n_filas = 20, n_columnas = 20, n_obstaculos = 50, opc = 1;
+    int n_filas = 20, n_columnas = 20, n_obstaculos = 75, opc = 1;
     
     cout << "\nIntroduzca número de filas: ";
   //  cin >> n_filas;
@@ -103,6 +103,18 @@ int main(){
     mov = getch();
     refresh();
     endwin();
+    
+    if(mov == 'p' &&  mov!= ERR){
+        citi.realeatorio(n_obstaculos);
+    }else
+    
+    if(mov == 'P' &&  mov!= ERR){
+        citi.realeatorio(n_obstaculos, x_ini-1, y_ini-1);
+    }else
+    
+    if(mov == 'o' &&  mov!= ERR){
+        citi.set_obstac();
+    }else
     
     
     if(mov != 'q' &&  mov!= ERR){
