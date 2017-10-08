@@ -1,4 +1,4 @@
-Buscar la forma de moverme y que se actualiza solo  Realizado
+Buscar la forma de moverme y que se actualiza solo  REALIZADO =)
 Crear puntacion
 Crear enemigo(?)
-Mejorar la clase obstaculo, ¿Con herencia? si le voy a meter mas cosas lo veo mas factible
+Mejorar la clase obstaculo, ¿Con herencia? si le voy a meter mas cosas lo veo mas factible REALIZADO =)
