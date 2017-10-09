@@ -10,7 +10,8 @@ ciudad::ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin){
     for(int i = 0; i< x; i++)
         for(int j = 0; j <y; j++)
             city[i][j] = new camino();
-
+    
+    puntuacion = 0;
     pos_x = x;
     pos_y = y;
     carro.pos_x = x_ini;
@@ -22,7 +23,7 @@ ciudad::ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin){
 ciudad::~ciudad(){}
 
 void ciudad::pintar_ciudad(void){
-        
+    cout<<endl<<"PUNTUACION ~~~~~~> "<<puntuacion;    
     cout << endl << KGRN " \xe2\x95\x94";
     for(int k = 0; k < pos_y ; k++)
         if(k != 0 || k != pos_y-1)
@@ -39,6 +40,7 @@ void ciudad::pintar_ciudad(void){
             if(carro.pos_x == i && carro.pos_y == j)
                 cout <<RSD " "<<carro.car;
             else city[i][j]->print(cout);
+                //cout<<" "<<city[i][j]->que_soy();
         }
         cout<< KGRN " \xe2\x95\x91"<<endl;
     }
@@ -129,7 +131,12 @@ bool ciudad::mover_carro(char mov){
                   carro.car = '<';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
                     if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('-');
+                        else{
+                            puntuacion++;
+                            del_mon();
+                        }
                     else
                         car_go_to();
                 
@@ -139,7 +146,12 @@ bool ciudad::mover_carro(char mov){
                   carro.car = 'v';
                   if((city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 ))
                     if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('|');
+                        else{
+                            puntuacion++;
+                            del_mon();
+                        }
                     else
                         car_go_to();  
                         
@@ -150,7 +162,12 @@ bool ciudad::mover_carro(char mov){
                   carro.car = '>';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
                     if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('-');
+                        else{
+                          puntuacion++;
+                          del_mon();  
+                        }
                     else
                         car_go_to();
                   break;
@@ -159,7 +176,12 @@ bool ciudad::mover_carro(char mov){
                   carro.car = '^';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
                     if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
-                        city[carro.pos_x][carro.pos_y]  = new estela('|');
+                        if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
+                            city[carro.pos_x][carro.pos_y] = new estela('|');
+                        else{
+                            puntuacion++;
+                            del_mon();
+                        }
                     else
                         car_go_to();   
                 
@@ -201,4 +223,35 @@ void ciudad::elim_obstac(){
                     
     system("clear");
     pintar_ciudad();
+}
+
+void ciudad::set_mon(){
+    srand(time(NULL));
+    int x, y;
+    bool fin = true;
+    x = rand() % pos_x;
+    y = rand() % pos_y;
+    while(fin)
+        if(city[x][y]->que_soy() < 3){
+            city[x][y] = new moneda();
+            fin = false;
+        }
+}
+
+void ciudad::del_mon(){
+    for(int i = 0; i< pos_x; i++)
+        for(int j = 0; j<pos_y;j++)
+            if(city[i][j]->que_soy()==6)
+                city[i][j] = new camino();
+}
+
+int ciudad::contr_mon(int ti){
+    if(ti > 120){
+        del_mon();
+        set_mon();
+        system("clear");
+        pintar_ciudad();
+        return 0;
+    }
+    return ti;
 }

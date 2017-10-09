@@ -9,7 +9,7 @@
 
 
 using namespace std;
-
+#define KBLACK   "\x1B[95m"
 #define KBLU "\x1B[34m"
 #define KWHT "\x1B[37m"
 #define KRED "\x1B[31m"
@@ -92,3 +92,14 @@ class pipo: public camino{
     
 };
 
+class moneda: public camino{
+    
+    public:
+     
+    moneda();
+    
+    ostream& print(ostream& os);
+    
+    int que_soy();
+    
+};

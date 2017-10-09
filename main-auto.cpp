@@ -1,6 +1,6 @@
 #include "ciudad.hpp"
-#define TAM 50
-#define POR 30
+#define TAM 15
+#define POR 20
 #define OBS 75
 #define CHO 2
 
@@ -82,12 +82,16 @@ int main(){
        
     char mov; 
     bool fin;
+    citi.set_mon();
     system("clear");
     citi.pintar_ciudad();
+    int tiempo;
+    
+    //citi.set_mon();
     
     do{
     
-    usleep(50000);
+    usleep(41667);
     
     initscr();
 	nodelay(stdscr,TRUE);
@@ -97,6 +101,9 @@ int main(){
     mov = getch();
     refresh();
     endwin();
+    
+    tiempo++;
+    tiempo = citi.contr_mon(tiempo);
     
     if(mov == 'p' &&  mov!= ERR)
         citi.realeatorio(n_obstaculos);

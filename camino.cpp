@@ -82,7 +82,7 @@
     }
     
     ostream& pipo::print(ostream& os){
-        os <<KYEL" "<<escr;
+        os <<KYEL" \xc3\x9e";
         
     }
     
@@ -90,7 +90,19 @@
         return 5;
     }
     
-
+ //·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~   
+    
+    moneda::moneda(){
+        escr = 'M';
+    }
+    
+    ostream& moneda::print(ostream& os){
+        os <<KBLACK" \xc3\x9f";
+    }
+    
+    int moneda::que_soy(){
+        return 6;
+    }
     
 
 
