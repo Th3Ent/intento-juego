@@ -1,28 +1,22 @@
 #include "ciudad.hpp"
-#include <ncurses.h>
-#include <stdlib.h>
-#include <unistd.h>
-#define KBLU "\x1B[34m"
-#define KWHT "\x1B[37m"
-#define KRED "\x1B[31m"
-#define RSD "\x1B[0m"
-#define KGRN "\x1B[32m"
-#define KYEL "\x1B[33m"
-#define KCYN "\x1B[36m"
+#define TAM 50
+#define POR 30
+#define OBS 75
+#define CHO 2
 
 int main(){
     for(int i = 0; i < 100; i++)
         cout<<endl;
     system("clear");
     
-    int n_filas = 20, n_columnas = 20, n_obstaculos = 75, opc = 1;
-    
+    int n_filas = TAM, n_columnas = TAM, n_obstaculos = OBS, opc = CHO;
+    int porcentaje = POR;
     cout << "\nIntroduzca número de filas: ";
   //  cin >> n_filas;
     cout << "\nIntroduzca número de columnas: ";
 //    cin >> n_columnas;
     
-    int x_ini = 1, x_fin = 20, y_ini = 1, y_fin = 20;
+    int x_ini = 1, x_fin = TAM, y_ini = 1, y_fin = TAM;
     do{
         
     do{
@@ -62,9 +56,9 @@ int main(){
                     citi.aleatorio(n_obstaculos);
                     break;
             case 2: cout << "\nIntroduce porcentaje: ";
-                    int porcentaje;
+                    
                     while(porcentaje > 101){
-                    cin >> porcentaje;
+        //            cin >> porcentaje;
                     if(porcentaje > 101)
                         cout<<"\n El porcentaje maximo es 100% no "<<porcentaje;
                     }
@@ -90,8 +84,8 @@ int main(){
     bool fin;
     system("clear");
     citi.pintar_ciudad();
-    do{
     
+    do{
     
     usleep(50000);
     
@@ -104,24 +98,19 @@ int main(){
     refresh();
     endwin();
     
-    if(mov == 'p' &&  mov!= ERR){
+    if(mov == 'p' &&  mov!= ERR)
         citi.realeatorio(n_obstaculos);
-    }else
-    
-    if(mov == 'P' &&  mov!= ERR){
-        citi.realeatorio(n_obstaculos, x_ini-1, y_ini-1);
-    }else
-    
-    if(mov == 'o' &&  mov!= ERR){
-        citi.set_obstac();
-    }else
-    
-    
-    if(mov != 'q' &&  mov!= ERR){
-    fin = citi.mover_carro(mov);
-    system("clear");
-    citi.pintar_ciudad();
-    }
+    else if(mov == 'P' &&  mov!= ERR)
+            citi.realeatorio(n_obstaculos, x_ini-1, y_ini-1);
+         else if(mov == 'o' &&  mov!= ERR)
+                citi.set_obstac();
+             else if(mov == 'l' &&  mov!= ERR)
+                    citi.elim_obstac();
+                 else if(mov != 'q' &&  mov!= ERR){
+                        fin = citi.mover_carro(mov);
+                        system("clear");
+                        citi.pintar_ciudad();
+                     }
     }while(!(fin || mov == 'q'));
     if(fin)
         cout<<"\nFELICIDADES! LLEGASTE AL DESTINO\n\n";

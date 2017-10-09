@@ -1,4 +1,13 @@
+#pragma once
+
 #include <iostream>
+#include <vector>
+#include <stdlib.h>
+#include <ncurses.h>
+#include <unistd.h>
+
+
+
 using namespace std;
 
 #define KBLU "\x1B[34m"
@@ -11,9 +20,7 @@ using namespace std;
 #define KSRED "\x1B[91m"
 
 
-#include <vector>
 
-#include <stdlib.h>
 class camino{
     
     public:
@@ -71,5 +78,17 @@ class estela: public camino{
     ostream& print(ostream& os);
     
     int que_soy();
+};
+
+class pipo: public camino{
+    
+    public:
+     
+    pipo();
+    
+    ostream& print(ostream& os);
+    
+    int que_soy();
+    
 };
 

@@ -20,7 +20,8 @@
     }
     
     ostream& estela::print(ostream& os){
-        os <<KSRED" "<<escr;
+    //    os <<KSRED" "<<escr;
+        os <<KSRED"  ";
         return os;
     }
     
@@ -74,7 +75,22 @@
         return 4;
     }
 
+ //·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~   
     
+    pipo::pipo(){
+        escr = 'T';
+    }
+    
+    ostream& pipo::print(ostream& os){
+        os <<KYEL" "<<escr;
+        
+    }
+    
+    int pipo::que_soy(){
+        return 5;
+    }
+    
+
     
 
 

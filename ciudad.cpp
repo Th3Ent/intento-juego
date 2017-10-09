@@ -60,10 +60,10 @@ void ciudad::manu_alea(int n){
 }
   
 void ciudad::aleatorio(int n){
-    
+    int x, y;
     srand(time(NULL));
     while(n > 0){  
-        int x, y;
+        
         x = rand() % pos_x;
         y = rand() % pos_y;
         if(city[x][y]->que_soy() < 2){
@@ -71,6 +71,10 @@ void ciudad::aleatorio(int n){
         n--;
         }
     }
+    city[pos_x/4][pos_y/4] = new pipo();
+    city[(pos_x*3)/4][pos_y/4] = new pipo();
+    city[pos_x/4][(pos_y*3)/4] = new pipo();
+    city[(pos_x*3)/4][(pos_y*3)/4] = new pipo();
 }
 
 
@@ -92,6 +96,10 @@ void ciudad::realeatorio(int n){
         n--;
         }
     }
+    city[pos_x/4][pos_y/4] = new pipo();
+    city[(pos_x*3)/4][pos_y/4] = new pipo();
+    city[pos_x/4][(pos_y*3)/4] = new pipo();
+    city[(pos_x*3)/4][(pos_y*3)/4] = new pipo();
     system("clear");
     pintar_ciudad();
 }
@@ -99,58 +107,62 @@ void ciudad::realeatorio(int n){
 void ciudad::realeatorio(int n, int x, int y){
     carro.pos_x = x;
     carro.pos_y = y;
-    srand(time(NULL));
+    realeatorio(n);
     
-    for(int i = 0; i< pos_x; i++)
-        for(int j = 0; j <pos_y; j++)
-            if(city[i][j]->que_soy() < 3 )
-              city[i][j] = new camino();
-    
-    while(n > 0){  
-        int x, y;
-        x = rand() % pos_x;
-        y = rand() % pos_y;
-        if(city[x][y]->que_soy() < 2){
-        city[x][y] = new obstaculo();
-        n--;
-        }
-    }
-    system("clear");
-    pintar_ciudad();
 }
 
-
+void ciudad::car_go_to(){
+    srand(time(NULL));
+    int x, y;
+    x = rand() % pos_x;
+    y = rand() % pos_y;
+    carro.pos_x = x;
+    carro.pos_y = y;
+    
+}
 
 bool ciudad::mover_carro(char mov){
     //cout<<endl<<carro.pos_x<<" <--X  Y--> 0"<<carro.pos_y;
     switch(mov){
-        case 'a': if( (carro.pos_y-1 >= 0 ) && (city[carro.pos_x][carro.pos_y-1]->que_soy() != 2  )){
+        case 'a': if( (carro.pos_y-1 >= 0 ) && (city[carro.pos_x][carro.pos_y-1]->que_soy() != 2  ))
                   carro.pos_y--;
                   carro.car = '<';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
-                  city[carro.pos_x][carro.pos_y] = new estela('-');
-                }
+                    if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        city[carro.pos_x][carro.pos_y] = new estela('-');
+                    else
+                        car_go_to();
+                
                   break;
-        case 's': if( ((carro.pos_x+1 < pos_x) && city[carro.pos_x+1][carro.pos_y]->que_soy() != 2)){
+        case 's': if( ((carro.pos_x+1 < pos_x) && city[carro.pos_x+1][carro.pos_y]->que_soy() != 2))
                   carro.pos_x++;
                   carro.car = 'v';
                   if((city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 ))
-                  city[carro.pos_x][carro.pos_y] = new estela('|');
-                }
+                    if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        city[carro.pos_x][carro.pos_y] = new estela('|');
+                    else
+                        car_go_to();  
+                        
+                
                   break;
-        case 'd': if( (carro.pos_y+1 < pos_y) && (city[carro.pos_x][carro.pos_y+1]->que_soy() != 2  )){
+        case 'd': if( (carro.pos_y+1 < pos_y) && (city[carro.pos_x][carro.pos_y+1]->que_soy() != 2  ))
                   carro.pos_y++;
                   carro.car = '>';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
-                  city[carro.pos_x][carro.pos_y] = new estela('-');
-                }
+                    if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        city[carro.pos_x][carro.pos_y] = new estela('-');
+                    else
+                        car_go_to();
                   break;
-        case 'w': if(((carro.pos_x-1 >= 0) && city[carro.pos_x-1][carro.pos_y]->que_soy() != 2)){
+        case 'w': if(((carro.pos_x-1 >= 0) && city[carro.pos_x-1][carro.pos_y]->que_soy() != 2))
                   carro.pos_x--;
                   carro.car = '^';
                   if(city[carro.pos_x][carro.pos_y]->que_soy() != 3 && city[carro.pos_x][carro.pos_y]->que_soy() != 4 )
-                  city[carro.pos_x][carro.pos_y]  = new estela('|');
-                }
+                    if(city[carro.pos_x][carro.pos_y]->que_soy() != 5)
+                        city[carro.pos_x][carro.pos_y]  = new estela('|');
+                    else
+                        car_go_to();   
+                
                   break;
         default: cout<<"\nMovimiento erroneo";
         
@@ -175,4 +187,18 @@ void ciudad::set_obstac(){
             cout<<"\nImposible";
         }
     
+}
+
+void ciudad::elim_obstac(){
+    if(carro.car == '<' && (carro.pos_y-1 >= 0 ) && city[carro.pos_x][carro.pos_y-1]->que_soy()<3)                               //a
+        city[carro.pos_x][carro.pos_y-1] = new camino();
+    else if(carro.car == '>' && (carro.pos_y+1 < pos_y) && city[carro.pos_x][carro.pos_y+1]->que_soy()<3)                        //d
+            city[carro.pos_x][carro.pos_y+1] = new camino();
+         else if(carro.car == '^' && (carro.pos_x-1 >= 0) && city[carro.pos_x-1][carro.pos_y]->que_soy()<3)                      //w
+                city[carro.pos_x-1][carro.pos_y] = new camino();
+             else if(carro.car == 'v' && (carro.pos_x+1 < pos_x) && city[carro.pos_x+1][carro.pos_y]->que_soy()<3)               //s
+                    city[carro.pos_x+1][carro.pos_y] = new camino();
+                    
+    system("clear");
+    pintar_ciudad();
 }

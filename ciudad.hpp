@@ -31,7 +31,8 @@ class ciudad{
     void realeatorio(int n, int x, int y);
     bool mover_carro(char mov);
     void set_obstac();
-    
+    void elim_obstac();
+    void car_go_to();
 };
 
 
