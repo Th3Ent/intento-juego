@@ -13,7 +13,8 @@ typedef struct{
 class ciudad{
   
   public:
-    int puntuacion;
+    int puntuacion, timemon;
+    int punt;
     vector<vector<camino*> > city;
     int pos_x;
     int pos_y;
@@ -21,7 +22,7 @@ class ciudad{
     
 
     
-    ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin);
+    ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin, int timemon_, int pun);
     ~ciudad();
     
     void pintar_ciudad(void);
@@ -33,8 +34,8 @@ class ciudad{
     void set_obstac();
     void elim_obstac();
     void car_go_to();
-    void del_mon();
-    void set_mon();
+    int del_mon();
+    void set_mon(int n);
     int contr_mon(int ti);
 };
 

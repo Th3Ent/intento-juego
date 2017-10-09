@@ -1,11 +1,13 @@
 #include "ciudad.hpp"
     
-ciudad::ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin){
+ciudad::ciudad(int x, int y, int x_ini, int x_fin, int y_ini, int y_fin, int timemon_, int pun){
     city.resize(x);
     for(int i = 0; i < x; i++){
         city[i].resize(y);
     }
     
+    timemon = timemon_;
+    punt = pun;
     
     for(int i = 0; i< x; i++)
         for(int j = 0; j <y; j++)
@@ -134,8 +136,8 @@ bool ciudad::mover_carro(char mov){
                         if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('-');
                         else{
-                            puntuacion++;
-                            del_mon();
+                             puntuacion += punt;
+                            contr_mon(500);
                         }
                     else
                         car_go_to();
@@ -149,8 +151,8 @@ bool ciudad::mover_carro(char mov){
                         if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('|');
                         else{
-                            puntuacion++;
-                            del_mon();
+                            puntuacion += punt;
+                            contr_mon(500);
                         }
                     else
                         car_go_to();  
@@ -165,8 +167,8 @@ bool ciudad::mover_carro(char mov){
                         if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                         city[carro.pos_x][carro.pos_y] = new estela('-');
                         else{
-                          puntuacion++;
-                          del_mon();  
+                          puntuacion += punt;
+                          contr_mon(500);  
                         }
                     else
                         car_go_to();
@@ -179,8 +181,8 @@ bool ciudad::mover_carro(char mov){
                         if(city[carro.pos_x][carro.pos_y]->que_soy() != 6)
                             city[carro.pos_x][carro.pos_y] = new estela('|');
                         else{
-                            puntuacion++;
-                            del_mon();
+                            puntuacion += punt;
+                            contr_mon(500);
                         }
                     else
                         car_go_to();   
@@ -225,30 +227,36 @@ void ciudad::elim_obstac(){
     pintar_ciudad();
 }
 
-void ciudad::set_mon(){
+void ciudad::set_mon(int n){
     srand(time(NULL));
     int x, y;
-    bool fin = true;
+    for(int i = 0; i < n; i++){
     x = rand() % pos_x;
     y = rand() % pos_y;
-    while(fin)
+    
         if(city[x][y]->que_soy() < 3){
             city[x][y] = new moneda();
-            fin = false;
         }
+        else
+            i--;
+    }
+    
 }
 
-void ciudad::del_mon(){
+int ciudad::del_mon(){
+    int n = 0;
     for(int i = 0; i< pos_x; i++)
         for(int j = 0; j<pos_y;j++)
-            if(city[i][j]->que_soy()==6)
+            if(city[i][j]->que_soy()==6){
                 city[i][j] = new camino();
+                n++;
+            }
+        return n-1;
 }
 
 int ciudad::contr_mon(int ti){
-    if(ti > 120){
-        del_mon();
-        set_mon();
+    if(ti > timemon){
+        set_mon(del_mon());
         system("clear");
         pintar_ciudad();
         return 0;
